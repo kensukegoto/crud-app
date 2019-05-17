@@ -1,13 +1,13 @@
-export const INCREMENT = 'INCREMENT'
-export const DECREMENT = 'DECREMENT'
+import axios from 'axios'
+export const READ_EVENTS = 'READ_EVENTS'
 
-// typeを返すのみ
-export const increment = () => ({
-    type: INCREMENT
-})
+const ROOT_URL = 'https://udemy-utils.herokuapp.com/api/v1'
+const QUERYSTRING = '?token=token123'
 
-// typeを返すのみ
-export const decrement = () => ({
-    type: DECREMENT
-})
-
+// dispatch => {} という関数が戻り値
+export const readEvents = () => async dispatch => {
+  const response = await axios.get(`${ROOT_URL}/events${QUERYSTRING}`)
+  console.log(response)
+  dispatch({ type: READ_EVENTS, response })
+  
+}
