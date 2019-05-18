@@ -1,3 +1,16 @@
+## コンポーネントにメソッドを追加する際はthisをバインドする
+
+onClickとonSubmitを紐づけた際に、thisのバインドをしないとonSubmit内でthisを使いたい場合に、undefinedになる
+```JS
+constructor(props){
+  super(props)
+  // コールバック内でthisが変更されないように設定
+  this.onSubmit = this.onSubmit.bind(this)
+  this.onDelete = this.onDelete.bind(this)
+}
+```
+
+
 ## react-router-dom
 ヒストリーAPIを操作しつつ、画面遷移もしてくれる
 ```JS
@@ -42,3 +55,16 @@ export const increment = () => dispatch => {
 ```
 
 ## axios
+
+## redux-devtools-extension
+
+- `yarn add redux-devtools-extension`
+- index.jsにて使用するための設定
+```JS
+import { composeWithDevTools } from 'redux-devtools-extension'
+
+const enhancer = process.env.NODE_ENV === 'development' ?
+composeWithDevTools(applyMiddleware(thunk)) : applyMiddleware(thunk)
+const store = createStore(reducer,enhancer)
+
+```
